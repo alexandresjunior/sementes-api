@@ -11,3 +11,5 @@
 * No navegador, acessar `http://localhost:5000/sementes`
 
 ## Demonstração
+
+ <img src="https://user-images.githubusercontent.com/83607914/209138933-b208be23-4d5d-48ea-b0df-38cbe2e4f334.gif" width="65%" />
