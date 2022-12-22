@@ -38,9 +38,9 @@ def preverEspecieDaSemente():
     #     "especie": int(result[0])
     # }
 
-    # return jsonify(response)
+    # return str(result[0])
 
-    return render_template("index.html", especie=result[0])
+    return render_template("index.html", especie=str(result[0]))
 
 
 if __name__ == "__main__":
