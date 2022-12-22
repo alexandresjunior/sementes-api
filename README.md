@@ -1,5 +1,7 @@
 # Sementes Web API
 
+## Configuração de Ambiente
+
 * Pré-requisito: Python <= 3.10 instalado.
 * Executar `pip install flask`
 * Executar `pip install tensorflow==2.8.2`
@@ -7,3 +9,5 @@
 * [Flask Quickstart](https://flask.palletsprojects.com/en/2.2.x/quickstart/)
 * Executar `flask --app main run`
 * No navegador, acessar `http://localhost:5000/sementes`
+
+## Demonstração
