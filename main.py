@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from keras.models import load_model
 import numpy as np
 import os
@@ -6,21 +6,21 @@ import os
 app = Flask(__name__)
 
 
-@app.route("/")
-def home():
-    return "Sementes API"
+@app.get("/sementes")
+def obterDadosDaSemente():
+    return render_template("index.html")
 
 
-@app.route("/sementes", methods=["POST"])
-def preverSemente():
-    # Get request body input parameters
-    area = request.json.get("area")
-    perimetro = request.json.get("perimetro")
-    compacidade = request.json.get("compacidade")
-    comprimento = request.json.get("comprimento")
-    largura = request.json.get("largura")
-    assimetria = request.json.get("assimetria")
-    comprimento_sulco = request.json.get("comprimento_sulco")
+@app.post("/sementes")
+def preverEspecieDaSemente():
+    # Get request body (form/json) input parameters
+    area = float(request.form.get("area"))
+    perimetro = float(request.form.get("perimetro"))
+    compacidade = float(request.form.get("compacidade"))
+    comprimento = float(request.form.get("comprimento"))
+    largura = float(request.form.get("largura"))
+    assimetria = float(request.form.get("assimetria"))
+    comprimento_sulco = float(request.form.get("comprimento_sulco"))
 
     # Load trained neural network model
     model = load_model(os.path.join("./model", "sementes_classificacao.h5"))
@@ -34,11 +34,14 @@ def preverSemente():
     result = np.argmax(pred, axis=1)
 
     # Set JSON response object
-    response = {
-        "especie": int(result[0])
-    }
+    # response = {
+    #     "especie": int(result[0])
+    # }
 
-    return jsonify(response)
+    # return jsonify(response)
+
+    return render_template("index.html", especie=result[0])
 
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
